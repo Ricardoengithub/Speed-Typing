@@ -1,11 +1,11 @@
 import React from 'react';
-
+import './Home.css'
 class Home extends React.Component{
   constructor(props){
     super(props)
     console.log(props)
     this.state = {
-      line: props.data.quotes[0].quote,
+      line: props.data.quotes[2].quote,
       dateI: "",
       dateF:"",
       percentage: 0,
@@ -30,12 +30,12 @@ class Home extends React.Component{
         s: e.target.value
       })
       
-      if(e.target.value.length == 1){
+      if(e.target.value.length === 1){
         this.setState({
           dateI: new Date()
         })
       }
-  
+      // eslint-disable-next-line
       if(e.target.value.length == this.state.line.length){
         this.setState({
           dateF: new Date() - this.state.dateI
@@ -48,6 +48,7 @@ class Home extends React.Component{
   
       let counter = 0
       for (let index = 0; index < this.state.line.length; index++) {
+        // eslint-disable-next-line
         if(e.target.value[index] == this.state.line[index])
           counter++;
       }
@@ -61,13 +62,15 @@ class Home extends React.Component{
 
   render(){
     return(
-      <div>
+      <div id="container">
+        <h5>Speed Typing Test</h5>
         <h1>{this.state.line}</h1>
         <input type="text" value={this.state.s} maxLength={this.state.line.length} onChange = {e => this.handlechange(e)}/><br/>
         <button onClick={this.handleclick}>Get new</button>
-        <h1>{this.state.percentage}%</h1>
-        <h1>{this.state.dateF == "" ? 0 : this.state.dateF} miliseconds</h1>
-    <h1>{this.props.data.quotes[0].quote}</h1>
+        <h3>{this.state.percentage.toString().substring(0,4)} %</h3>
+        
+        <h3>{// eslint-disable-next-line 
+        this.state.dateF == "" ? 0 : this.state.dateF} miliseconds</h3>
       </div>
     )
   }
